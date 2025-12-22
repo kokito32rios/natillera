@@ -213,24 +213,20 @@ async function realizarCambioConfig(clave, valor) {
 // ========================================
 async function cargarHistorial() {
     try {
-        // Por ahora mostrar mensaje, luego implementamos la consulta
-        const tbody = document.getElementById('tablaHistorial');
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="5" class="text-center">
-                    <i class="fas fa-info-circle"></i>
-                    No hay cambios recientes
-                </td>
-            </tr>
-        `;
+        const response = await fetch('/api/configuracion/historial/todos');
+        const historial = await response.json();
         
-        // TODO: Implementar consulta al endpoint de historial
-        // const response = await fetch('/api/configuracion/historial');
-        // const historial = await response.json();
-        // mostrarHistorial(historial);
+        mostrarHistorial(historial);
         
     } catch (error) {
         console.error('Error cargando historial:', error);
+        document.getElementById('tablaHistorial').innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center" style="color: var(--error-color);">
+                    Error al cargar historial
+                </td>
+            </tr>
+        `;
     }
 }
 

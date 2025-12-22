@@ -6,6 +6,7 @@ const { isAuthenticated, isAdmin } = require('../middleware/auth');
 router.use(isAuthenticated);
 
 router.get('/', configuracionController.obtenerTodos);
+router.get('/historial/todos', configuracionController.obtenerHistorial);  // ← NUEVA
 router.get('/:clave', configuracionController.obtenerPorClave);
 router.put('/:clave', isAdmin, configuracionController.actualizar);
 
