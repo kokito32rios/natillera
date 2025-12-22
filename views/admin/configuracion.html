@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuración - Administrador</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Mi Natillera</span>
+          </div>
+          <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="/views/admin/dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/views/admin/usuarios.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span>
+          </a>
+          <a href="/views/admin/aportes.html" class="nav-item">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Aportes</span>
+          </a>
+          <a href="/views/admin/prestamos.html" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Préstamos</span>
+          </a>
+          <a href="/views/admin/actividades.html" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Actividades</span>
+          </a>
+          <a href="/views/admin/ganancias.html" class="nav-item">
+            <i class="fas fa-coins"></i>
+            <span>Ganancias</span>
+          </a>
+          <a href="/views/admin/configuracion.html" class="nav-item active">
+            <i class="fas fa-cog"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="welcome-section">
+              <h2>
+                Bienvenid@ <span class="user-name" id="userName">...</span>
+              </h2>
+            </div>
+          </div>
+          <div class="header-right">
+            <span class="role-badge admin">
+              <i class="fas fa-user-shield"></i>
+              Administrador
+            </span>
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+          <!-- HEADER DE LA PÁGINA -->
+          <div class="page-header">
+            <div>
+              <h1><i class="fas fa-cog"></i> Configuración del Sistema</h1>
+              <p>
+                Gestiona las tasas de interés, montos y parámetros generales
+              </p>
+            </div>
+          </div>
+
+          <!-- TARJETAS DE CONFIGURACIÓN -->
+          <div class="config-grid">
+            <!-- TASAS DE INTERÉS -->
+            <div class="section-card">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-percentage"></i>
+                  Tasas de Interés
+                </h3>
+              </div>
+              <div class="config-list" id="configTasas">
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+
+            <!-- LÍMITES DE PRÉSTAMOS -->
+            <div class="section-card">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-dollar-sign"></i>
+                  Límites de Préstamos
+                </h3>
+              </div>
+              <div class="config-list" id="configLimites">
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+
+            <!-- INFORMACIÓN GENERAL -->
+            <div class="section-card">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-info-circle"></i>
+                  Información General
+                </h3>
+              </div>
+              <div class="config-list" id="configGeneral">
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- HISTORIAL DE CAMBIOS -->
+          <div class="section-card">
+            <div class="section-header">
+              <h3>
+                <i class="fas fa-history"></i>
+                Historial de Cambios Recientes
+              </h3>
+              <button class="btn-secondary btn-sm" onclick="cargarHistorial()">
+                <i class="fas fa-sync-alt"></i>
+                Actualizar
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Configuración</th>
+                    <th>Valor Anterior</th>
+                    <th>Valor Nuevo</th>
+                    <th>Modificado Por</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaHistorial">
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      <i class="fas fa-spinner fa-spin"></i>
+                      Cargando historial...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL EDITAR CONFIGURACIÓN -->
+    <div id="modalConfig" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModalConfig()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="fas fa-edit modal-icon"></i>
+          <h3 id="modalConfigTitle">Editar Configuración</h3>
+        </div>
+        <form id="formConfig" onsubmit="return false;">
+          <div class="modal-body">
+            <div class="config-info">
+              <p id="configDescripcion"></p>
+            </div>
+
+            <div class="form-group">
+              <label for="valor">
+                <i class="fas fa-edit"></i>
+                Nuevo Valor *
+              </label>
+              <input
+                type="text"
+                id="valor"
+                name="valor"
+                required
+                placeholder="Ingrese el nuevo valor"
+              />
+              <small id="valorHint"></small>
+            </div>
+
+            <input type="hidden" id="clave" name="clave" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="cerrarModalConfig()"
+            >
+              <i class="fas fa-times"></i>
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary" id="btnGuardarConfig">
+              <i class="fas fa-save"></i>
+              Guardar Cambios
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL CONFIRMACIÓN -->
+    <div id="modalConfirm" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModal()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="fas fa-question-circle modal-icon"></i>
+          <h3 id="modalTitle">Confirmar cambio</h3>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage">¿Estás seguro?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="cerrarModal()">
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button class="btn-primary" id="btnConfirmar">
+            <i class="fas fa-check"></i>
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/configuracion.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ exports.obtenerTodos = async (req, res) => {
         const [config] = await db.query('SELECT * FROM configuracion');
         res.json(config);
     } catch (error) {
+        console.error('Error:', error);
         res.status(500).json({ error: 'Error al obtener configuración' });
     }
 };
@@ -14,6 +15,7 @@ exports.obtenerPorClave = async (req, res) => {
         const [config] = await db.query('SELECT * FROM configuracion WHERE clave = ?', [req.params.clave]);
         res.json(config[0] || {});
     } catch (error) {
+        console.error('Error:', error);
         res.status(500).json({ error: 'Error al obtener configuración' });
     }
 };
@@ -24,6 +26,7 @@ exports.actualizar = async (req, res) => {
         await db.query('UPDATE configuracion SET valor = ? WHERE clave = ?', [valor, req.params.clave]);
         res.json({ success: true });
     } catch (error) {
+        console.error('Error:', error);
         res.status(500).json({ error: 'Error al actualizar configuración' });
     }
 };

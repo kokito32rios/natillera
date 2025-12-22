@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const actividadExtraController = require('../controllers/actividadExtraController');
+const configuracionController = require('../controllers/configuracionController');
 const { isAuthenticated, isAdmin } = require('../middleware/auth');
 
 router.use(isAuthenticated);
 
-router.get('/', actividadExtraController.obtenerTodos);
-router.get('/:id', actividadExtraController.obtenerPorId);
-router.post('/', isAdmin, actividadExtraController.crear);
-router.put('/:id', isAdmin, actividadExtraController.actualizar);
-router.delete('/:id', isAdmin, actividadExtraController.eliminar);
+router.get('/', configuracionController.obtenerTodos);
+router.get('/:clave', configuracionController.obtenerPorClave);
+router.put('/:clave', isAdmin, configuracionController.actualizar);
 
 module.exports = router;

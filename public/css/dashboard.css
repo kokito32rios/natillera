@@ -343,8 +343,6 @@ body {
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 0 -1.5rem;
-    padding: 0 1.5rem;
     position: relative;
 }
 
@@ -834,42 +832,58 @@ body {
     }
 
     .action-buttons {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        gap: 0.25rem;
+    }
+
+    /* Contenedor principal más estrecho */
+    .content {
+        padding: 1rem;
     }
 
     /* Tabla más compacta en móvil */
     .section-card {
-        padding: 1rem;
-        margin: 0 -1rem 1rem;
+        padding: 0.5rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
         border-radius: 0;
     }
 
     .table-responsive {
-        margin: 0 -1rem;
-        padding: 0 1rem;
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .data-table {
+        min-width: 700px;
     }
 
     .data-table th,
     .data-table td {
-        padding: 0.75rem 0.5rem;
-        font-size: 0.85rem;
+        padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
     .data-table th {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 
     /* Botones de acción más pequeños */
     .btn-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
     }
 
     /* Badge más pequeño */
     .badge {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         padding: 0.25rem 0.5rem;
+    }
+
+    .badge i {
+        font-size: 0.65rem;
     }
 
     /* Modal en móvil */
@@ -915,6 +929,81 @@ body {
         min-width: auto;
         width: 100%;
     }
+}
+
+/* ========================================
+   CONFIGURACIÓN
+======================================== */
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.config-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.config-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray-light);
+    transition: background 0.3s;
+}
+
+.config-item:last-child {
+    border-bottom: none;
+}
+
+.config-item:hover {
+    background: var(--light);
+}
+
+.config-item-left {
+    flex: 1;
+}
+
+.config-item-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-item-desc {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.config-item-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.config-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.config-info {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.config-info p {
+    margin: 0;
+    color: var(--dark-light);
+    font-size: 0.9rem;
 }
 
 /* ========================================
