@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios - Administrador</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Mi Natillera</span>
+          </div>
+          <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="/views/admin/dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/views/admin/usuarios.html" class="nav-item active">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span>
+          </a>
+          <a href="/views/admin/aportes.html" class="nav-item">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Aportes</span>
+          </a>
+          <a href="/views/admin/prestamos.html" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Préstamos</span>
+          </a>
+          <a href="/views/admin/actividades.html" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Actividades</span>
+          </a>
+          <a href="/views/admin/ganancias.html" class="nav-item">
+            <i class="fas fa-coins"></i>
+            <span>Ganancias</span>
+          </a>
+          <a href="/views/admin/configuracion.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="welcome-section">
+              <h2>
+                Bienvenid@ <span class="user-name" id="userName">...</span>
+              </h2>
+            </div>
+          </div>
+          <div class="header-right">
+            <span class="role-badge admin" id="userRole">
+              <i class="fas fa-user-shield"></i>
+              Administrador
+            </span>
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+          <!-- HEADER DE LA PÁGINA -->
+          <div class="page-header">
+            <div>
+              <h1><i class="fas fa-users"></i> Gestión de Usuarios</h1>
+              <p>Administra los usuarios del sistema</p>
+            </div>
+            <button class="btn-primary" onclick="abrirModalCrear()">
+              <i class="fas fa-user-plus"></i>
+              Crear Usuario
+            </button>
+          </div>
+
+          <!-- FILTROS Y BÚSQUEDA -->
+          <div class="section-card">
+            <div class="filters-container">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Buscar por nombre, apellido o email..."
+                  onkeyup="filtrarUsuarios()"
+                />
+              </div>
+              <div class="filter-group">
+                <select id="filterRol" onchange="filtrarUsuarios()">
+                  <option value="">Todos los roles</option>
+                  <option value="1">Administradores</option>
+                  <option value="2">Clientes</option>
+                </select>
+                <select id="filterAdmin" onchange="filtrarUsuarios()">
+                  <option value="">Todos los admins</option>
+                </select>
+                <button class="btn-secondary btn-sm" onclick="limpiarFiltros()">
+                  <i class="fas fa-times"></i>
+                  Limpiar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLA DE USUARIOS -->
+          <div class="section-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Rol</th>
+                    <th>Admin Asignado</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaUsuarios">
+                  <tr>
+                    <td colspan="7" class="text-center">
+                      <i class="fas fa-spinner fa-spin"></i>
+                      Cargando usuarios...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL CREAR/EDITAR USUARIO -->
+    <div id="modalUsuario" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModalUsuario()"></div>
+      <div class="modal-container modal-large">
+        <div class="modal-header">
+          <i class="fas fa-user modal-icon"></i>
+          <h3 id="modalUsuarioTitle">Crear Usuario</h3>
+        </div>
+        <div class="modal-body">
+          <form id="formUsuario" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">
+                  <i class="fas fa-user"></i>
+                  Nombre *
+                </label>
+                <input type="text" id="nombre" name="nombre" required />
+              </div>
+              <div class="form-group">
+                <label for="apellido">
+                  <i class="fas fa-user"></i>
+                  Apellido *
+                </label>
+                <input type="text" id="apellido" name="apellido" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">
+                  <i class="fas fa-envelope"></i>
+                  Email *
+                </label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="telefono">
+                  <i class="fas fa-phone"></i>
+                  Teléfono
+                </label>
+                <input type="tel" id="telefono" name="telefono" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="direccion">
+                <i class="fas fa-map-marker-alt"></i>
+                Dirección
+              </label>
+              <input type="text" id="direccion" name="direccion" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="id_rol">
+                  <i class="fas fa-user-tag"></i>
+                  Rol *
+                </label>
+                <select
+                  id="id_rol"
+                  name="id_rol"
+                  required
+                  onchange="toggleAdminAsignado()"
+                >
+                  <option value="">Seleccionar...</option>
+                  <option value="1">Administrador</option>
+                  <option value="2">Cliente</option>
+                </select>
+              </div>
+              <div
+                class="form-group"
+                id="grupoAdminAsignado"
+                style="display: none"
+              >
+                <label for="id_administrador">
+                  <i class="fas fa-user-tie"></i>
+                  Admin Asignado *
+                </label>
+                <select id="id_administrador" name="id_administrador">
+                  <option value="">Seleccionar...</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" id="grupoPassword">
+              <label for="password">
+                <i class="fas fa-lock"></i>
+                Contraseña *
+              </label>
+              <input type="password" id="password" name="password" />
+              <small>Mínimo 6 caracteres</small>
+            </div>
+
+            <input type="hidden" id="id_usuario" name="id_usuario" />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="cerrarModalUsuario()"
+          >
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            form="formUsuario"
+            class="btn-primary"
+            id="btnGuardar"
+          >
+            <i class="fas fa-save"></i>
+            <span id="btnGuardarText">Guardar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL VER DETALLES -->
+    <div id="modalDetalles" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModalDetalles()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="fas fa-info-circle modal-icon"></i>
+          <h3>Detalles del Usuario</h3>
+        </div>
+        <div class="modal-body" id="detallesUsuario">
+          <!-- Se llenará dinámicamente -->
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="cerrarModalDetalles()">
+            <i class="fas fa-times"></i>
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL CONFIRMACIÓN -->
+    <div id="modalConfirm" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModal()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="fas fa-question-circle modal-icon"></i>
+          <h3 id="modalTitle">Confirmar acción</h3>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage">¿Estás seguro?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="cerrarModal()">
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button class="btn-danger" id="btnConfirmar">
+            <i class="fas fa-check"></i>
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/usuarios.js"></script>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Natillera de Ahorros - Ahorra y Crece</title>
+    <meta
+      name="description"
+      content="Únete a nuestra natillera de ahorros. Ahorra, gana intereses y accede a préstamos con las mejores tasas."
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <linkS
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand">
+          <i class="fas fa-piggy-bank"></i>
+          <span>Mi Natillera</span>
+        </div>
+        <div class="nav-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#beneficios">Beneficios</a>
+          <a href="#como-funciona">¿Cómo funciona?</a>
+          <a href="#contacto">Contacto</a>
+          <button
+            class="btn-login"
+            onclick="window.location.href='/views/login.html'"
+          >
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+          </button>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1 class="hero-title">
+          <span class="highlight">Ahorra Hoy,</span><br />
+          Construye tu Futuro
+        </h1>
+        <p class="hero-subtitle">
+          Únete a nuestra comunidad de ahorro colaborativo.<br />
+          Gana intereses, accede a préstamos y cumple tus metas.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="mostrarModalRegistro()">
+            <i class="fas fa-user-plus"></i> Quiero Unirme
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="window.location.href='/views/login.html'"
+          >
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+          </button>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <i class="fas fa-users"></i>
+          <h3></h3>
+          <p></p>
+        </div>
+        <div class="stat">
+          <i class="fas fa-coins"></i>
+          <h3></h3>
+          <p></p>
+        </div>
+        <div class="stat">
+          <i class="fas fa-trophy"></i>
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS SECTION -->
+    <section id="beneficios" class="beneficios">
+      <div class="container">
+        <h2 class="section-title">¿Por qué ahorrar con nosotros?</h2>
+        <div class="beneficios-grid">
+          <div class="beneficio-card">
+            <div class="icon-wrapper">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Ingresos extra a tus ahorros</h3>
+            <p>
+              Genera ingresos extra participando en las rifas fijas mensuales y
+              en las trimestrales
+            </p>
+          </div>
+          <div class="beneficio-card">
+            <div class="icon-wrapper">
+              <i class="fas fa-hand-holding-usd"></i>
+            </div>
+            <h3>Préstamos Accesibles</h3>
+            <p>
+              Accede a préstamos con tasas preferenciales y cuotas flexibles.
+            </p>
+          </div>
+          <div class="beneficio-card">
+            <div class="icon-wrapper">
+              <i class="fas fa-gift"></i>
+            </div>
+            <h3>Actividades Extras</h3>
+            <p>Participa en rifas, bingos y gana premios adicionales.</p>
+          </div>
+          <div class="beneficio-card">
+            <div class="icon-wrapper">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Transparencia Total</h3>
+            <p>
+              Consulta tus movimientos en cualquier momento desde tu panel
+              personal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA SECTION -->
+    <section id="como-funciona" class="como-funciona">
+      <div class="container">
+        <h2 class="section-title">¿Cómo funciona?</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Únete</h3>
+            <p>Contacta al administrador para crear tu cuenta.</p>
+          </div>
+          <div class="step-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Ahorra</h3>
+            <p>Realiza tus aportes mensuales según tu capacidad.</p>
+          </div>
+          <div class="step-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Crece</h3>
+            <p>Gana intereses y accede a préstamos cuando lo necesites.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO SECTION -->
+    <section id="contacto" class="contacto">
+      <div class="container">
+        <h2 class="section-title">¿Listo para empezar?</h2>
+        <p class="contacto-subtitle">
+          Contáctanos y comienza a construir tu futuro financiero
+        </p>
+        <button
+          class="btn btn-primary btn-large"
+          onclick="mostrarModalRegistro()"
+        >
+          <i class="fas fa-phone-alt"></i> Contáctanos Ahora
+        </button>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3><i class="fas fa-piggy-bank"></i> Mi Natillera</h3>
+            <p>Ahorro colaborativo que transforma vidas</p>
+          </div>
+          <div class="footer-section">
+            <h4>Enlaces Rápidos</h4>
+            <ul>
+              <li><a href="#inicio">Inicio</a></li>
+              <li><a href="#beneficios">Beneficios</a></li>
+              <li><a href="/views/login.html">Iniciar Sesión</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Web realizada por Kokito Rios</h4>
+            <p><i class="fas fa-phone"></i> +57 304 534 31 23</p>
+            <p><i class="fas fa-envelope"></i> duvan.rios.arley@gmail.com</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Mi Natillera. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL REGISTRO -->
+    <div id="modalRegistro" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModalRegistro()">&times;</span>
+        <div class="modal-header">
+          <i class="fas fa-user-plus modal-icon"></i>
+          <h2>¿Quieres unirte?</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+            Para crear tu cuenta en la natillera, por favor contacta a nuestro
+            administrador:
+          </p>
+          <div class="admin-info">
+            <div class="admin-item">
+              <i class="fas fa-user-tie"></i>
+              <div>
+                <strong>Nombre:</strong>
+                <p>Jorge Administrador</p>
+              </div>
+            </div>
+            <div class="admin-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <strong>Teléfono:</strong>
+                <p>+57 301 242 3706</p>
+              </div>
+            </div>
+            <div class="admin-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Email:</strong>
+                <p>admin@minatillera.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <a
+              href="https://wa.me/573012423706"
+              target="_blank"
+              class="btn btn-whatsapp"
+            >
+              <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+            </a>
+            <button class="btn btn-secondary" onclick="cerrarModalRegistro()">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/index.js"></script>
+  </body>
+</html>

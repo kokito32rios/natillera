@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Administrador</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Mi Natillera</span>
+          </div>
+          <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="/views/admin/dashboard.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/views/admin/usuarios.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span>
+          </a>
+          <a href="/views/admin/aportes.html" class="nav-item">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Aportes</span>
+          </a>
+          <a href="/views/admin/prestamos.html" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Préstamos</span>
+          </a>
+          <a href="/views/admin/actividades.html" class="nav-item">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Actividades</span>
+          </a>
+          <a href="/views/admin/ganancias.html" class="nav-item">
+            <i class="fas fa-coins"></i>
+            <span>Ganancias</span>
+          </a>
+          <a href="/views/admin/configuracion.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Configuración</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="welcome-section">
+              <h2>
+                Bienvenid@ <span class="user-name" id="userName">...</span>
+              </h2>
+            </div>
+          </div>
+          <div class="header-right">
+            <span class="role-badge admin" id="userRole">
+              <i class="fas fa-user-shield"></i>
+              Administrador
+            </span>
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+          <!-- STATS CARDS -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalClientes">0</h3>
+                <p>Total Clientes</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalAhorrado">$0</h3>
+                <p>Total Ahorrado</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon orange">
+                <i class="fas fa-file-invoice-dollar"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="prestamosActivos">0</h3>
+                <p>Préstamos Activos</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon purple">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="gananciasMes">$0</h3>
+                <p>Ganancias del Mes</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESUMEN POR ADMINISTRADOR -->
+          <div class="section-card">
+            <div class="section-header">
+              <h3>
+                <i class="fas fa-user-tie"></i>
+                Resumen por Administrador
+              </h3>
+              <button class="btn-secondary btn-sm" onclick="cargarResumen()">
+                <i class="fas fa-sync-alt"></i>
+                Actualizar
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Administrador</th>
+                    <th>Clientes Asignados</th>
+                    <th>Total Ahorrado</th>
+                    <th>Ganancias Recibidas</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaAdministradores">
+                  <tr>
+                    <td colspan="5" class="text-center">
+                      <i class="fas fa-spinner fa-spin"></i>
+                      Cargando datos...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ACTIVIDADES RECIENTES -->
+          <div class="grid-2">
+            <div class="section-card">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-history"></i>
+                  Aportes Recientes
+                </h3>
+                <a href="/views/admin/aportes.html" class="btn-link">
+                  Ver todos
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div id="aportesRecientes" class="activity-list">
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+
+            <div class="section-card">
+              <div class="section-header">
+                <h3>
+                  <i class="fas fa-calendar-check"></i>
+                  Actividades Próximas
+                </h3>
+                <a href="/views/admin/actividades.html" class="btn-link">
+                  Ver todas
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div id="actividadesProximas" class="activity-list">
+                <div class="loading-state">
+                  <i class="fas fa-spinner fa-spin"></i>
+                  Cargando...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div id="modalConfirm" class="modal" style="display: none">
+      <div class="modal-overlay" onclick="cerrarModal()"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <i class="fas fa-sign-out-alt modal-icon"></i>
+          <h3 id="modalTitle">Cerrar Sesión</h3>
+        </div>
+        <div class="modal-body">
+          <p id="modalMessage">¿Estás seguro de que deseas cerrar sesión?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="cerrarModal()">
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button class="btn-danger" id="btnConfirmar">
+            <i class="fas fa-check"></i>
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/dashboard.js?v=2"></script>
+  </body>
+</html>
