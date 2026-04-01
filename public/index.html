@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,7 @@
           <a href="#contacto">Contacto</a>
           <button
             class="btn-login"
-            onclick="window.location.href='/login.html'"
+            onclick="window.location.href = '/login.html'"
           >
             <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
           </button>
@@ -62,7 +62,7 @@
           </button>
           <button
             class="btn btn-secondary"
-            onclick="window.location.href='/login.html'"
+            onclick="window.location.href = '/login.html'"
           >
             <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
           </button>
@@ -183,7 +183,10 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h3><i class="fas fa-piggy-bank"></i> <span data-natillera-name>Mi Natillera</span></h3>
+            <h3>
+              <i class="fas fa-piggy-bank"></i>
+              <span data-natillera-name>Mi Natillera</span>
+            </h3>
             <p>Ahorro colaborativo que transforma vidas</p>
           </div>
           <div class="footer-section">
@@ -195,13 +198,29 @@
             </ul>
           </div>
           <div class="footer-section">
-            <h4>Web realizada por Kokito Rios</h4>
-            <p><i class="fas fa-phone"></i> +57 304 534 31 23</p>
-            <p><i class="fas fa-envelope"></i> duvan.rios.arley@gmail.com</p>
+            <h4>Contacto</h4>
+            <p>
+              <a href="mailto:duvan.rios.arley@gmail.com">
+                <i class="fas fa-envelope"></i> duvan.rios.arley@gmail.com
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://www.tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-tiktok"></i> TikTok
+              </a>
+            </p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p data-natillera-template="© 2025 {{name}}. Todos los derechos reservados.">&copy; 2025 Mi Natillera. Todos los derechos reservados.</p>
+          <p
+            data-natillera-template="© 2025 {{name}}. Todos los derechos reservados."
+          >
+            &copy; 2025 Mi Natillera. Todos los derechos reservados.
+          </p>
         </div>
       </div>
     </footer>
@@ -246,8 +265,9 @@
           </div>
           <div class="modal-actions">
             <a
-              href="https://wa.me/573012423706"
+              href="https://wa.me/573012423706?text=Hola,%20quiero%20informaci%C3%B3n%20para%20unirme%20a%20la%20natillera."
               target="_blank"
+              rel="noopener noreferrer"
               class="btn btn-whatsapp"
             >
               <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
@@ -265,4 +285,3 @@
     <script src="/js/pwa.js"></script>
   </body>
 </html>
-
