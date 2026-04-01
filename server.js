@@ -8,6 +8,8 @@ const { isAuthenticated, isAdmin, isCliente } = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const isProduction = process.env.NODE_ENV === 'production';
+const publicUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // ============================================
 // MIDDLEWARES
@@ -15,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 
 // CORS
 app.use(cors());
+app.set('trust proxy', 1);
 
 // Body parser
 app.use(express.json());
@@ -29,7 +32,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false, // Cambiar a true en producción con HTTPS
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
         maxAge: 1000 * 60 * 60 * 24 // 24 horas
     }
 }));
@@ -134,12 +138,13 @@ app.listen(PORT, () => {
     ║     NATILLERA DE AHORROS - SERVER     ║
     ╠═══════════════════════════════════════════╣
     ║   Servidor corriendo en:                  ║
-    ║   http://localhost:${PORT}                   ║
+    ║   ${publicUrl}                   ║
     ║                                           ║
     ║   Ambiente: ${process.env.NODE_ENV || 'development'}              ║
     ╚═══════════════════════════════════════════╝
     `);
 });
+
 
 
 
