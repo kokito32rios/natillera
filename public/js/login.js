@@ -122,9 +122,9 @@ async function handleLogin(e) {
             // Redirigir según el rol
             setTimeout(() => {
                 if (data.usuario.rol === 'admin') {
-                    window.location.href = '/views/admin/dashboard.html';
+                    window.location.href = '/admin/dashboard.html';
                 } else {
-                    window.location.href = '/views/cliente/dashboard.html';
+                    window.location.href = '/cliente/dashboard.html';
                 }
             }, 1000);
             

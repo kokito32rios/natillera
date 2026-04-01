@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actividades - Administrador</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Mi Natillera</span>
+          </div>
+          <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="/admin/dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/admin/usuarios.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Usuarios</span>
+          </a>
+          <a href="/admin/aportes.html" class="nav-item">
+            <i class="fas fa-hand-holding-usd"></i>
+            <span>Aportes</span>
+          </a>
+          <a href="/admin/prestamos.html" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Prestamos</span>
+          </a>
+          <a href="/admin/actividades.html" class="nav-item active">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Actividades</span>
+          </a>
+          <a href="/admin/ganancias.html" class="nav-item">
+            <i class="fas fa-coins"></i>
+            <span>Ganancias</span>
+          </a>
+          <a href="/admin/configuracion.html" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Configuracion</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="logout-btn" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Cerrar Sesion</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="dashboard-header">
+          <div class="header-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="welcome-section">
+              <h2>Actividades</h2>
+            </div>
+          </div>
+          <div class="header-right">
+            <span class="role-badge admin">
+              <i class="fas fa-user-shield"></i>
+              Administrador
+            </span>
+          </div>
+        </header>
+
+        <div class="content">
+          <div class="section-card" style="text-align: center; padding: 4rem 2rem">
+            <i class="fas fa-calendar-alt" style="font-size: 3rem; margin-bottom: 1rem"></i>
+            <h1 style="margin-bottom: 0.75rem">Proximamente</h1>
+            <p style="margin-bottom: 1.5rem">
+              El modulo de actividades se encuentra en construccion.
+            </p>
+            <a href="/admin/dashboard.html" class="btn-primary" style="display: inline-flex; text-decoration: none">
+              <i class="fas fa-arrow-left"></i>
+              <span style="margin-left: 0.5rem">Volver al dashboard</span>
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

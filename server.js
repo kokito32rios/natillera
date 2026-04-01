@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
+const { isAuthenticated, isAdmin, isCliente } = require('./middleware/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,7 +36,6 @@ app.use(session({
 
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/views', express.static(path.join(__dirname, 'views')));
 
 // ============================================
 // RUTAS
@@ -61,9 +61,49 @@ app.use('/api/actividades', actividadExtraRoutes);
 app.use('/api/configuracion', configuracionRoutes);
 app.use('/api/ganancias', gananciaRoutes);
 
-// Ruta principal - Servir index.html desde views
+// Ruta principal - Servir index.html desde public
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/admin/dashboard.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'dashboard.html'));
+});
+
+app.get('/admin/usuarios.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'usuarios.html'));
+});
+
+app.get('/admin/aportes.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'aportes.html'));
+});
+
+app.get('/admin/prestamos.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'prestamos.html'));
+});
+
+app.get('/admin/configuracion.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'configuracion.html'));
+});
+
+app.get('/admin/actividades.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'actividades.html'));
+});
+
+app.get('/admin/ganancias.html', isAuthenticated, isAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'admin', 'ganancias.html'));
+});
+
+app.get('/cliente/dashboard.html', isAuthenticated, isCliente, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cliente', 'dashboard.html'));
+});
+
+app.get('/cliente/mis-ahorros.html', isAuthenticated, isCliente, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cliente', 'mis-ahorros.html'));
+});
+
+app.get('/cliente/mis-prestamos.html', isAuthenticated, isCliente, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'cliente', 'mis-prestamos.html'));
 });
 
 // ============================================
@@ -91,7 +131,7 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`
     ╔═══════════════════════════════════════════╗
-    ║   🏦  NATILLERA DE AHORROS - SERVER     ║
+    ║     NATILLERA DE AHORROS - SERVER     ║
     ╠═══════════════════════════════════════════╣
     ║   Servidor corriendo en:                  ║
     ║   http://localhost:${PORT}                   ║
@@ -100,3 +140,6 @@ app.listen(PORT, () => {
     ╚═══════════════════════════════════════════╝
     `);
 });
+
+
+

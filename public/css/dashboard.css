@@ -932,6 +932,100 @@ body {
 }
 
 /* ========================================
+   PRÉSTAMOS - ESTILOS ADICIONALES
+======================================== */
+.prestamo-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.prestamo-detail-item {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.prestamo-detail-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 0.25rem;
+}
+
+.prestamo-detail-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.cronograma-table {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.cronograma-table th,
+.cronograma-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.cronograma-table th {
+    background: var(--light);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.cuota-pagada {
+    background: #d1fae5;
+}
+
+.cuota-pendiente {
+    background: #fef3c7;
+}
+
+.cuota-morosa {
+    background: #fee2e2;
+}
+
+.preview-section {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+.preview-section h4 {
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+}
+
+.preview-label {
+    font-weight: 600;
+    color: var(--dark-light);
+}
+
+.preview-value {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ========================================
    CONFIGURACIÓN
 ======================================== */
 .config-grid {

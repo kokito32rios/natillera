@@ -19,10 +19,10 @@ const promisePool = pool.promise();
 // Probar conexión
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('❌ Error conectando a la base de datos:', err.message);
+        console.error('[DB ERROR] Error conectando a la base de datos:', err.message);
         return;
     }
-    console.log('✅ Conexión exitosa a MySQL');
+    console.log('[DB OK] Conexion exitosa a MySQL');
     connection.release();
 });
 

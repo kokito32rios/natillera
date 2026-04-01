@@ -9,7 +9,7 @@ let usuarioActual = null;
 // ========================================
 document.addEventListener('DOMContentLoaded', async () => {
     await verificarSesion();
-    if (usuarioActual) {
+    if (usuarioActual && esVistaDashboardAdmin()) {
         cargarDatosDashboard();
     }
 });
@@ -23,22 +23,26 @@ async function verificarSesion() {
         const data = await response.json();
         
         if (!data.authenticated) {
-            window.location.href = '/views/login.html';
+            window.location.href = '/login.html';
             return;
         }
         
         if (data.usuario.rol !== 'admin') {
-            window.location.href = '/views/cliente/dashboard.html';
+            window.location.href = '/cliente/dashboard.html';
             return;
         }
         
         usuarioActual = data.usuario;
-        document.getElementById('userName').textContent = 
-            `${usuarioActual.nombre} ${usuarioActual.apellido}`;
+
+        const userNameElement = document.getElementById('userName');
+        if (userNameElement) {
+            userNameElement.textContent =
+                `${usuarioActual.nombre} ${usuarioActual.apellido}`;
+        }
         
     } catch (error) {
         console.error('Error verificando sesión:', error);
-        window.location.href = '/views/login.html';
+        window.location.href = '/login.html';
     }
 }
 
@@ -182,7 +186,7 @@ async function cargarActividadesProximas() {
 // VER DETALLE DE ADMINISTRADOR
 // ========================================
 function verDetalleAdmin(idAdmin) {
-    window.location.href = `/views/admin/usuarios.html?admin=${idAdmin}`;
+    window.location.href = `/admin/usuarios.html?admin=${idAdmin}`;
 }
 
 // ========================================
@@ -198,6 +202,14 @@ function toggleSidebar() {
 // ========================================
 function mostrarModal(titulo, mensaje, icono, onConfirm) {
     const modal = document.getElementById('modalConfirm');
+    if (!modal) {
+        const confirmado = window.confirm(mensaje);
+        if (confirmado && onConfirm) {
+            onConfirm();
+        }
+        return;
+    }
+
     const modalTitle = document.getElementById('modalTitle');
     const modalMessage = document.getElementById('modalMessage');
     const modalIcon = modal.querySelector('.modal-icon');
@@ -220,6 +232,9 @@ function mostrarModal(titulo, mensaje, icono, onConfirm) {
 
 function cerrarModal() {
     const modal = document.getElementById('modalConfirm');
+    if (!modal) {
+        return;
+    }
     modal.style.display = 'none';
 }
 
@@ -234,7 +249,7 @@ function cerrarSesion() {
         async () => {
             try {
                 await fetch('/api/auth/logout', { method: 'POST' });
-                window.location.href = '/views/login.html';
+                window.location.href = '/login.html';
             } catch (error) {
                 console.error('Error al cerrar sesión:', error);
                 alert('Error al cerrar sesión. Intenta nuevamente.');
@@ -267,4 +282,12 @@ function formatDate(date) {
         month: 'long',
         day: 'numeric'
     });
+}
+
+function esVistaDashboardAdmin() {
+    return Boolean(
+        document.getElementById('totalClientes') &&
+        document.getElementById('aportesRecientes') &&
+        document.getElementById('actividadesProximas')
+    );
 }
