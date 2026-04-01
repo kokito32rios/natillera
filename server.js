@@ -10,6 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 const publicUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+const sessionSecret = process.env.SESSION_SECRET || 'change-this-session-secret-in-production';
+
+if (!process.env.SESSION_SECRET) {
+    console.warn('[SESSION WARNING] SESSION_SECRET no esta definido. Usa una variable segura en produccion.');
+}
 
 // ============================================
 // MIDDLEWARES
@@ -28,7 +33,7 @@ app.use(cookieParser());
 
 // Session
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: {
