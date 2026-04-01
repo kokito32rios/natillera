@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 const { isAuthenticated, isAdmin, isCliente } = require('./middleware/auth');
+const db = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,6 +44,55 @@ app.use(session({
     }
 }));
 
+async function obtenerNombreNatillera() {
+    try {
+        const [config] = await db.query(
+            'SELECT valor FROM configuracion WHERE clave = ? LIMIT 1',
+            ['nombre_natillera']
+        );
+
+        return config[0]?.valor || 'Mi Natillera';
+    } catch (error) {
+        console.error('[BRANDING ERROR] No se pudo cargar nombre_natillera:', error.message);
+        return 'Mi Natillera';
+    }
+}
+
+app.get('/api/public/config/nombre-natillera', async (req, res) => {
+    const nombre = await obtenerNombreNatillera();
+    res.json({ valor: nombre });
+});
+
+app.get('/manifest.webmanifest', async (req, res) => {
+    const nombre = await obtenerNombreNatillera();
+
+    res.type('application/manifest+json');
+    res.send({
+        name: nombre,
+        short_name: nombre,
+        description: `Sistema de gestion para ${nombre}.`,
+        start_url: '/',
+        scope: '/',
+        display: 'standalone',
+        background_color: '#f4efe6',
+        theme_color: '#1e6f5c',
+        orientation: 'portrait',
+        icons: [
+            {
+                src: '/icons/icon-192.svg',
+                sizes: '192x192',
+                type: 'image/svg+xml',
+                purpose: 'any maskable'
+            },
+            {
+                src: '/icons/icon-512.svg',
+                sizes: '512x512',
+                type: 'image/svg+xml',
+                purpose: 'any maskable'
+            }
+        ]
+    });
+});
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -149,6 +199,7 @@ app.listen(PORT, () => {
     ╚═══════════════════════════════════════════╝
     `);
 });
+
 
 
 

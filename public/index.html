@@ -183,7 +183,7 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <h3><i class="fas fa-piggy-bank"></i> Mi Natillera</h3>
+            <h3><i class="fas fa-piggy-bank"></i> <span data-natillera-name>Mi Natillera</span></h3>
             <p>Ahorro colaborativo que transforma vidas</p>
           </div>
           <div class="footer-section">
@@ -201,7 +201,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2025 Mi Natillera. Todos los derechos reservados.</p>
+          <p data-natillera-template="© 2025 {{name}}. Todos los derechos reservados.">&copy; 2025 Mi Natillera. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
@@ -261,6 +261,7 @@
     </div>
 
     <script src="/js/index.js"></script>
+    <script src="/js/branding.js"></script>
     <script src="/js/pwa.js"></script>
   </body>
 </html>

@@ -194,6 +194,9 @@ async function realizarCambioConfig(clave, valor) {
             cerrarModalConfig();
             await cargarConfiguraciones();
             await cargarHistorial();
+            if (clave === 'nombre_natillera' && typeof window.aplicarNombreNatillera === 'function') {
+                window.aplicarNombreNatillera(valor);
+            }
             mostrarToast('success', '¡Actualizado!', 'Configuración actualizada correctamente');
         } else {
             const error = await response.json();
