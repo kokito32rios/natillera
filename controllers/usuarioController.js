@@ -78,15 +78,21 @@ exports.crear = async (req, res) => {
 
 exports.actualizar = async (req, res) => {
     try {
-        const { nombre, apellido, email, telefono, direccion } = req.body;
-        
-        await db.query(
+        const { nombre, apellido, email, telefono, direccion, id_rol, id_administrador } = req.body;
+
+        const adminAsignado = parseInt(id_rol, 10) === 2 ? (id_administrador || null) : null;
+
+        const [result] = await db.query(
             `UPDATE usuarios 
-             SET nombre = ?, apellido = ?, email = ?, telefono = ?, direccion = ? 
+             SET nombre = ?, apellido = ?, email = ?, telefono = ?, direccion = ?, id_rol = ?, id_administrador = ?
              WHERE id_usuario = ?`,
-            [nombre, apellido, email, telefono, direccion, req.params.id]
+            [nombre, apellido, email, telefono, direccion, id_rol, adminAsignado, req.params.id]
         );
-        
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
         res.json({ success: true });
     } catch (error) {
         console.error('Error:', error);

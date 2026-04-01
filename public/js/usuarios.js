@@ -252,6 +252,7 @@ async function editarUsuario(id) {
     document.getElementById("telefono").value = usuarioEditar.telefono || "";
     document.getElementById("direccion").value = usuarioEditar.direccion || "";
     document.getElementById("id_rol").value = usuarioEditar.id_rol;
+    toggleAdminAsignado();
 
     // Manejar admin asignado
     if (usuarioEditar.id_rol === 2 && usuarioEditar.id_administrador) {
