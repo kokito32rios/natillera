@@ -3,229 +3,420 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1e6f5c" />
+    <meta name="theme-color" content="#0f172a" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
-    <title>Natillera de Ahorros - Ahorra y Crece</title>
+    <title>Natillera de Ahorros - Gestión moderna para tu ahorro</title>
     <meta
       name="description"
-      content="Únete a nuestra natillera de ahorros. Ahorra, gana intereses y accede a préstamos con las mejores tasas."
+      content="Administra aportes, préstamos y actividades con una imagen más profesional, clara y confiable para tu natillera."
     />
     <link rel="stylesheet" href="/css/index.css" />
-    <linkS
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
   <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="container">
-        <div class="nav-brand">
-          <i class="fas fa-piggy-bank"></i>
-          <span>Mi Natillera</span>
-        </div>
-        <div class="nav-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#beneficios">Beneficios</a>
-          <a href="#como-funciona">¿Cómo funciona?</a>
-          <a href="#contacto">Contacto</a>
-          <button
-            class="btn-login"
-            onclick="window.location.href = '/login.html'"
-          >
-            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+    <div class="page-shell">
+      <nav class="navbar">
+        <div class="container">
+          <a class="nav-brand" href="#inicio" aria-label="Ir al inicio">
+            <i class="fas fa-piggy-bank"></i>
+            <div>
+              <strong data-natillera-name>Mi Natillera</strong>
+              <span>Gestión inteligente del ahorro</span>
+            </div>
+          </a>
+
+          <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#soluciones">Soluciones</a>
+            <a href="#confianza">Confianza</a>
+            <a href="#contacto">Contacto</a>
+            <button class="btn-login" onclick="window.location.href = '/login.html'">
+              <i class="fas fa-right-to-bracket"></i>
+              <span>Ingresar</span>
+            </button>
+          </div>
+
+          <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+            <i class="fas fa-bars"></i>
           </button>
         </div>
-        <div class="nav-toggle" id="navToggle">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
-    </nav>
+      </nav>
 
-    <!-- HERO SECTION -->
-    <section id="inicio" class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-content">
-        <h1 class="hero-title">
-          <span class="highlight">Ahorra Hoy,</span><br />
-          Construye tu Futuro
-        </h1>
-        <p class="hero-subtitle">
-          Únete a nuestra comunidad de ahorro colaborativo.<br />
-          Gana intereses, accede a préstamos y cumple tus metas.
-        </p>
-        <div class="hero-buttons">
-          <button class="btn btn-primary" onclick="mostrarModalRegistro()">
-            <i class="fas fa-user-plus"></i> Quiero Unirme
-          </button>
-          <button
-            class="btn btn-secondary"
-            onclick="window.location.href = '/login.html'"
-          >
-            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
-          </button>
-        </div>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <i class="fas fa-users"></i>
-          <h3></h3>
-          <p></p>
-        </div>
-        <div class="stat">
-          <i class="fas fa-coins"></i>
-          <h3></h3>
-          <p></p>
-        </div>
-        <div class="stat">
-          <i class="fas fa-trophy"></i>
-          <h3></h3>
-          <p></p>
-        </div>
-      </div>
-    </section>
+      <main>
+        <section id="inicio" class="hero">
+          <div class="hero-orb orb-one"></div>
+          <div class="hero-orb orb-two"></div>
+          <div class="hero-grid"></div>
 
-    <!-- BENEFICIOS SECTION -->
-    <section id="beneficios" class="beneficios">
-      <div class="container">
-        <h2 class="section-title">¿Por qué ahorrar con nosotros?</h2>
-        <div class="beneficios-grid">
-          <div class="beneficio-card">
-            <div class="icon-wrapper">
-              <i class="fas fa-chart-line"></i>
+          <div class="container hero-layout">
+            <div class="hero-copy">
+              <div class="eyebrow">
+                <i class="fas fa-shield-heart"></i>
+                <span>Un ahorro que se siente cercano y seguro</span>
+              </div>
+
+              <h1 class="hero-title">
+                Ahorrar para tus metas
+                <span class="highlight">se siente más claro, motivador y posible</span>
+                desde el primer momento.
+              </h1>
+
+              <p class="hero-subtitle">
+                Vive una experiencia pensada para la persona que quiere guardar su
+                dinero con confianza, llevar control de sus aportes y avanzar paso
+                a paso hacia eso que sueña: un viaje, diciembre, su hogar o cualquier
+                meta importante.
+              </p>
+
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="mostrarModalRegistro()">
+                  <i class="fas fa-user-plus"></i>
+                  <span>Solicitar acceso</span>
+                </button>
+                <button class="btn btn-secondary" onclick="window.location.href = '/login.html'">
+                  <i class="fas fa-chart-column"></i>
+                  <span>Entrar al sistema</span>
+                </button>
+              </div>
+
+              <div class="hero-metrics">
+                <div class="metric-card">
+                  <span>Tu meta más cerca</span>
+                  <strong>Mes a mes</strong>
+                  <p>cada aporte suma con orden y te acerca a lo que quieres lograr</p>
+                </div>
+                <div class="metric-card">
+                  <span>Más tranquilidad</span>
+                  <strong>Con control</strong>
+                  <p>sabes cuánto llevas ahorrado y mantienes una visión más clara de tu progreso</p>
+                </div>
+              </div>
             </div>
-            <h3>Ingresos extra a tus ahorros</h3>
-            <p>
-              Genera ingresos extra participando en las rifas fijas mensuales y
-              en las trimestrales
-            </p>
-          </div>
-          <div class="beneficio-card">
-            <div class="icon-wrapper">
-              <i class="fas fa-hand-holding-usd"></i>
-            </div>
-            <h3>Préstamos Accesibles</h3>
-            <p>
-              Accede a préstamos con tasas preferenciales y cuotas flexibles.
-            </p>
-          </div>
-          <div class="beneficio-card">
-            <div class="icon-wrapper">
-              <i class="fas fa-gift"></i>
-            </div>
-            <h3>Actividades Extras</h3>
-            <p>Participa en rifas, bingos y gana premios adicionales.</p>
-          </div>
-          <div class="beneficio-card">
-            <div class="icon-wrapper">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Transparencia Total</h3>
-            <p>
-              Consulta tus movimientos en cualquier momento desde tu panel
-              personal.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- CÓMO FUNCIONA SECTION -->
-    <section id="como-funciona" class="como-funciona">
-      <div class="container">
-        <h2 class="section-title">¿Cómo funciona?</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h3>Únete</h3>
-            <p>Contacta al administrador para crear tu cuenta.</p>
-          </div>
-          <div class="step-arrow">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <h3>Ahorra</h3>
-            <p>Realiza tus aportes mensuales según tu capacidad.</p>
-          </div>
-          <div class="step-arrow">
-            <i class="fas fa-arrow-right"></i>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <h3>Crece</h3>
-            <p>Gana intereses y accede a préstamos cuando lo necesites.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="hero-showcase">
+              <div class="showcase-card showcase-main">
+                <div class="showcase-top">
+                  <div>
+                    <p class="showcase-label">Una experiencia pensada para ti</p>
+                    <h2 data-natillera-name>Mi Natillera</h2>
+                  </div>
+                  <span class="status-pill">
+                    <i class="fas fa-circle"></i>
+                    Ahorro en marcha
+                  </span>
+                </div>
 
-    <!-- CONTACTO SECTION -->
-    <section id="contacto" class="contacto">
-      <div class="container">
-        <h2 class="section-title">¿Listo para empezar?</h2>
-        <p class="contacto-subtitle">
-          Contáctanos y comienza a construir tu futuro financiero
-        </p>
-        <button
-          class="btn btn-primary btn-large"
-          onclick="mostrarModalRegistro()"
-        >
-          <i class="fas fa-phone-alt"></i> Contáctanos Ahora
-        </button>
-      </div>
-    </section>
+                <div class="goal-spotlight">
+                  <span class="goal-kicker">Meta destacada</span>
+                  <h3>Convierte pequeños aportes en logros que sí se sienten.</h3>
+                  <p>
+                    La natillera te acompaña con una experiencia ordenada, cercana
+                    y motivadora para que ahorrar no se vea difícil, sino alcanzable.
+                  </p>
+                </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3>
+                <div class="benefit-story">
+                  <article class="story-card accent">
+                    <i class="fas fa-plane-departure"></i>
+                    <div>
+                      <span>Viaje o descanso</span>
+                      <strong>Empieza a construirlo desde hoy</strong>
+                    </div>
+                  </article>
+                  <article class="story-card">
+                    <i class="fas fa-house"></i>
+                    <div>
+                      <span>Hogar y bienestar</span>
+                      <strong>Organiza mejor tus planes importantes</strong>
+                    </div>
+                  </article>
+                  <article class="story-card">
+                    <i class="fas fa-gift"></i>
+                    <div>
+                      <span>Diciembre y celebraciones</span>
+                      <strong>Llega con más alivio y preparación</strong>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="assurance-panel">
+                  <div class="assurance-copy">
+                    <p class="progress-title">Ahorrar con motivación cambia todo</p>
+                    <p>
+                      Una experiencia más humana ayuda a que cada persona vea su esfuerzo
+                      reflejado en progreso, constancia y metas reales.
+                    </p>
+                  </div>
+                  <div class="assurance-icons" aria-hidden="true">
+                    <span><i class="fas fa-coins"></i></span>
+                    <span><i class="fas fa-heart"></i></span>
+                    <span><i class="fas fa-seedling"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="showcase-stack">
+                <article class="showcase-card mini-panel">
+                  <p class="mini-label">Lo que transmite la experiencia</p>
+                  <div class="mini-item">
+                    <i class="fas fa-circle-check"></i>
+                    <span>Más confianza para seguir aportando con disciplina</span>
+                  </div>
+                  <div class="mini-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Mayor cercanía con metas que antes se veían lejanas</span>
+                  </div>
+                </article>
+
+                <article class="showcase-card mini-panel warm">
+                  <p class="mini-label">Pensado para el ahorrador</p>
+                  <strong>Tu esfuerzo merece verse valioso</strong>
+                  <span>Una imagen más emocional y profesional hace que ahorrar se sienta mejor.</span>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="trust-strip">
+          <div class="container trust-grid">
+            <div class="trust-item">
+              <strong>+120</strong>
+              <span>usuarios organizados con una sola identidad visual</span>
+            </div>
+            <div class="trust-item">
+              <strong>12 meses</strong>
+              <span>de seguimiento proyectado para el ahorro colectivo</span>
+            </div>
+            <div class="trust-item">
+              <strong>Control total</strong>
+              <span>sobre aportes, préstamos y actividades desde un mismo lugar</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="soluciones" class="solutions">
+          <div class="container">
+            <div class="section-head">
+              <span class="section-pill">Soluciones</span>
+              <h2>Una experiencia pensada para que ahorrar se sienta más fácil y motivador</h2>
+              <p>
+                Cada bloque visual busca acompañar mejor al cliente: darle confianza,
+                mostrarle cercanía y recordarle que sus aportes tienen un propósito real.
+              </p>
+            </div>
+
+            <div class="solutions-grid">
+              <article class="solution-card featured">
+                <div class="solution-icon">
+                  <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Metas más fáciles de imaginar</h3>
+                <p>
+                  La portada conecta el ahorro con objetivos que emocionan y ayudan
+                  a mantener la disciplina mes a mes.
+                </p>
+              </article>
+
+              <article class="solution-card">
+                <div class="solution-icon">
+                  <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3>Más confianza para aportar</h3>
+                <p>
+                  Una imagen ordenada y cercana transmite seguridad para que cada
+                  persona sienta su dinero bien cuidado.
+                </p>
+              </article>
+
+              <article class="solution-card">
+                <div class="solution-icon">
+                  <i class="fas fa-gauge-high"></i>
+                </div>
+                <h3>Motivación para continuar</h3>
+                <p>
+                  El diseño invita a seguir ahorrando y refuerza la idea de progreso,
+                  constancia y recompensa.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="confianza" class="experience">
+          <div class="container experience-layout">
+            <div class="experience-copy">
+              <span class="section-pill">Confianza</span>
+              <h2>Una experiencia que hace sentir al cliente más seguro y motivado al ahorrar</h2>
+              <p>
+                La idea no es solo verse bien, sino crear una sensación de cercanía,
+                tranquilidad y compromiso para que cada persona disfrute más su proceso de ahorro.
+              </p>
+
+              <div class="experience-list">
+                <div class="experience-item">
+                  <i class="fas fa-check"></i>
+                  <span>Genera una mejor primera impresión para quien llega a ahorrar</span>
+                </div>
+                <div class="experience-item">
+                  <i class="fas fa-check"></i>
+                  <span>Transmite orden sin perder cercanía ni calidez</span>
+                </div>
+                <div class="experience-item">
+                  <i class="fas fa-check"></i>
+                  <span>Refuerza el valor de cada aporte y de cada meta personal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="experience-panel">
+              <article class="quote-card">
+                <span class="quote-tag">Sensación esperada</span>
+                <p>
+                  "Aquí mi ahorro se siente importante, bien cuidado y conectado con
+                  las metas que quiero cumplir."
+                </p>
+              </article>
+
+              <div class="timeline-card">
+                <div class="timeline-item">
+                  <strong>01</strong>
+                  <div>
+                    <h3>Se identifica con la experiencia</h3>
+                    <p>La persona siente que el ahorro está pensado para ella y para sus objetivos.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <strong>02</strong>
+                  <div>
+                    <h3>Ahorra con más confianza</h3>
+                    <p>La imagen transmite seriedad, acompañamiento y mayor tranquilidad.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <strong>03</strong>
+                  <div>
+                    <h3>Mantiene su motivación</h3>
+                    <p>Cada visita le recuerda que su esfuerzo vale la pena y sigue construyendo futuro.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto" class="contacto">
+          <div class="container">
+            <div class="contact-card">
+              <div class="contact-copy">
+                <span class="section-pill">Contacto</span>
+                <h2>Solicita información y conoce cómo unirte a la natillera</h2>
+                <p>
+                  Si deseas ingresar, resolver dudas o comenzar tu proceso de
+                  vinculación, puedes comunicarte directamente con el administrador de la natillera.
+                </p>
+              </div>
+              <div class="contact-actions">
+                <button class="btn btn-primary" onclick="mostrarModalRegistro()">
+                  <i class="fas fa-paper-plane"></i>
+                  <span>Solicitar acceso</span>
+                </button>
+                <div class="contact-link contact-static">
+                  <i class="fas fa-user-tie"></i>
+                  <span>Jorge Administrador</span>
+                </div>
+                <a class="contact-link" href="tel:+573012423706">
+                  <i class="fas fa-phone"></i>
+                  <span>+57 301 242 3706</span>
+                </a>
+                <a class="contact-link" href="mailto:admin@minatillera.com">
+                  <i class="fas fa-envelope"></i>
+                  <span>admin@minatillera.com</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-content">
+          <div class="footer-brand">
+            <div class="nav-brand footer-logo">
               <i class="fas fa-piggy-bank"></i>
-              <span data-natillera-name>Mi Natillera</span>
-            </h3>
-            <p>Ahorro colaborativo que transforma vidas</p>
+              <div>
+                <strong data-natillera-name>Mi Natillera</strong>
+                <span>Gestión inteligente del ahorro</span>
+              </div>
+            </div>
+            <p>
+              Plataforma creada para que el ahorro comunitario se administre con
+              una imagen tan sólida como su operación.
+            </p>
           </div>
-          <div class="footer-section">
-            <h4>Enlaces Rápidos</h4>
-            <ul>
-              <li><a href="#inicio">Inicio</a></li>
-              <li><a href="#beneficios">Beneficios</a></li>
-              <li><a href="/login.html">Iniciar Sesión</a></li>
-            </ul>
+
+          <div class="footer-links">
+            <h4>Navegación</h4>
+            <a href="#inicio">Inicio</a>
+            <a href="#soluciones">Soluciones</a>
+            <a href="#confianza">Confianza</a>
+            <a href="/login.html">Ingresar</a>
           </div>
-          <div class="footer-section">
+
+          <div class="footer-links">
             <h4>Contacto</h4>
-            <p>
-              <a href="mailto:duvan.rios.arley@gmail.com">
-                <i class="fas fa-envelope"></i> duvan.rios.arley@gmail.com
-              </a>
-            </p>
-            <p>
-              <a
-                href="https://www.tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fab fa-tiktok"></i> TikTok
-              </a>
-            </p>
+            <a href="mailto:admin@minatillera.com">admin@minatillera.com</a>
+            <a
+              href="https://www.tiktok.com/@duvan.data.anlyst.bi?_r=1&_t=ZS-95izRVyzIAb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-tiktok"></i>
+              <span>TikTok</span>
+            </a>
+            <a
+              href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=zam0fpb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
           </div>
         </div>
-        <div class="footer-bottom">
-          <p
-            data-natillera-template="© 2025 {{name}}. Todos los derechos reservados."
-          >
-            &copy; 2025 Mi Natillera. Todos los derechos reservados.
+        <div class="container footer-bottom">
+          <p data-natillera-template="2026 {{name}}. Todos los derechos reservados.">
+            2026 Mi Natillera. Todos los derechos reservados.
+          </p>
+          <p class="footer-credit">
+            <strong>Desarrollado por Duvan Ríos</strong>
+            <a
+              href="https://www.tiktok.com/@duvan.data.anlyst.bi?_r=1&_t=ZS-95izRVyzIAb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-tiktok"></i>
+              <span>TikTok</span>
+            </a>
+            /
+            <a
+              href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=zam0fpb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
           </p>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
 
-    <!-- MODAL REGISTRO -->
     <div id="modalRegistro" class="modal">
       <div class="modal-content">
         <span class="close" onclick="cerrarModalRegistro()">
@@ -233,47 +424,49 @@
         </span>
         <div class="modal-header">
           <i class="fas fa-user-plus modal-icon"></i>
-          <h2>¿Quieres unirte?</h2>
+          <h2>¿Quieres unirte a la natillera?</h2>
         </div>
         <div class="modal-body">
           <p>
-            Para crear tu cuenta en la natillera, por favor contacta a nuestro
-            administrador:
+            Para crear tu cuenta y conocer las condiciones de ingreso, contacta
+            directamente al administrador.
           </p>
           <div class="admin-info">
             <div class="admin-item">
               <i class="fas fa-user-tie"></i>
               <div>
-                <strong>Nombre:</strong>
+                <strong>Administrador</strong>
                 <p>Jorge Administrador</p>
               </div>
             </div>
             <div class="admin-item">
               <i class="fas fa-phone"></i>
               <div>
-                <strong>Teléfono:</strong>
+                <strong>Teléfono</strong>
                 <p>+57 301 242 3706</p>
               </div>
             </div>
             <div class="admin-item">
               <i class="fas fa-envelope"></i>
               <div>
-                <strong>Email:</strong>
+                <strong>Email</strong>
                 <p>admin@minatillera.com</p>
               </div>
             </div>
           </div>
           <div class="modal-actions">
             <a
-              href="https://wa.me/573012423706?text=Hola,%20quiero%20informaci%C3%B3n%20para%20unirme%20a%20la%20natillera."
+              href="https://wa.me/573012423706?text=Hola,%20quiero%20información%20para%20unirme%20a%20la%20natillera."
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp"
             >
-              <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+              <i class="fab fa-whatsapp"></i>
+              <span>Hablar por WhatsApp</span>
             </a>
-            <button class="btn btn-secondary" onclick="cerrarModalRegistro()">
-              Cerrar
+            <button class="btn btn-secondary modal-close-btn" onclick="cerrarModalRegistro()">
+              <i class="fas fa-arrow-left"></i>
+              <span>Cerrar</span>
             </button>
           </div>
         </div>

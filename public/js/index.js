@@ -14,15 +14,13 @@ function cerrarModalRegistro() {
     document.body.style.overflow = 'auto';
 }
 
-// Cerrar modal al hacer clic fuera de él
 window.onclick = function(event) {
     const modal = document.getElementById('modalRegistro');
     if (event.target === modal) {
         cerrarModalRegistro();
     }
-}
+};
 
-// Cerrar modal con tecla ESC
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         cerrarModalRegistro();
@@ -34,9 +32,10 @@ document.addEventListener('keydown', function(event) {
 // ========================================
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
+
         if (target) {
             target.scrollIntoView({
                 behavior: 'smooth',
@@ -50,28 +49,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // NAVBAR SCROLL EFFECT
 // ========================================
 
-let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll <= 0) {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+        navbar.style.boxShadow = '0 2px 10px rgba(15, 23, 42, 0.06)';
     } else {
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        navbar.style.boxShadow = '0 14px 32px rgba(15, 23, 42, 0.08)';
     }
-    
-    lastScroll = currentScroll;
 });
 
 // ========================================
-// ANIMACIÓN AL HACER SCROLL
+// ANIMACION AL HACER SCROLL
 // ========================================
 
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    threshold: 0.12,
+    rootMargin: '0px 0px -80px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -79,74 +75,39 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observar elementos para animación
 document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.beneficio-card, .step');
+    const animateElements = document.querySelectorAll(
+        '.metric-card, .solution-card, .experience-item, .timeline-item, .trust-item, .mini-panel'
+    );
+
     animateElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
 });
 
 // ========================================
-// MENÚ MÓVIL (TOGGLE)
+// MENU MOVIL
 // ========================================
 
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.querySelector('.nav-links');
 
-if (navToggle) {
+if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
-}
 
-// ========================================
-// CONTADOR ANIMADO
-// ========================================
-
-function animateCounter(element, target, duration = 2000) {
-    let current = 0;
-    const increment = target / (duration / 16);
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 16);
-}
-
-// Activar contador cuando sea visible
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-            entry.target.classList.add('counted');
-            const stats = entry.target.querySelectorAll('.stat h3');
-            stats.forEach(stat => {
-                const text = stat.textContent;
-                const number = parseInt(text.replace(/\D/g, ''));
-                if (!isNaN(number)) {
-                    stat.textContent = '0';
-                    animateCounter(stat, number, 2000);
-                    setTimeout(() => {
-                        stat.textContent = text;
-                    }, 2000);
-                }
-            });
-        }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
     });
-}, { threshold: 0.5 });
-
-const heroStats = document.querySelector('.hero-stats');
-if (heroStats) {
-    statsObserver.observe(heroStats);
 }

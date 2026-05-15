@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1e6f5c" />
+    <meta name="theme-color" content="#0f172a" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
-    <title>Iniciar Sesión - Natillera de Ahorros</title>
+    <title>Iniciar sesión - Natillera de Ahorros</title>
     <link rel="stylesheet" href="/css/login.css" />
     <link
       rel="stylesheet"
@@ -15,126 +15,147 @@
     />
   </head>
   <body>
-    <div class="login-container">
-      <!-- Lado izquierdo - Imagen/Branding -->
-      <div class="login-left">
-        <div class="login-branding">
-          <div class="brand-icon">
-            <i class="fas fa-piggy-bank"></i>
-          </div>
-          <h1 data-natillera-name>Mi Natillera</h1>
-          <p>Sistema de Gestión de Ahorros</p>
-          <div class="features">
-            <div class="feature">
-              <i class="fas fa-shield-alt"></i>
-              <span>Seguro y Confiable</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-chart-line"></i>
-              <span>Gestión Eficiente</span>
-            </div>
-            <div class="feature">
-              <i class="fas fa-users"></i>
-              <span>Comunidad Unida</span>
-            </div>
-          </div>
-        </div>
-        <div class="login-overlay"></div>
-      </div>
+    <div class="login-shell">
+      <div class="login-grid"></div>
+      <div class="login-orb orb-a"></div>
+      <div class="login-orb orb-b"></div>
 
-      <!-- Lado derecho - Formulario -->
-      <div class="login-right">
-        <div class="login-box">
-          <div class="login-header">
-            <h2>Bienvenido</h2>
-            <p>Ingresa tus credenciales para continuar</p>
-          </div>
-
-          <!-- Alerta de mensajes -->
-          <div id="alertMessage" class="alert" style="display: none">
-            <i class="fas fa-info-circle"></i>
-            <span id="alertText"></span>
-            <button class="alert-close" onclick="cerrarAlerta()">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-
-          <!-- Formulario de Login -->
-          <form id="loginForm" onsubmit="return false;">
-            <div class="form-group">
-              <label for="email">
-                <i class="fas fa-envelope"></i>
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="ejemplo@correo.com"
-                required
-                autocomplete="email"
-              />
-              <span class="error-message" id="emailError"></span>
+      <div class="login-container">
+        <section class="login-left">
+          <div class="login-branding">
+            <div class="eyebrow">
+              <i class="fas fa-shield-heart"></i>
+              <span>Acceso seguro y cercano</span>
             </div>
 
-            <div class="form-group">
-              <label for="password">
-                <i class="fas fa-lock"></i>
-                Contraseña
-              </label>
-              <div class="password-input">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="••••••••"
-                  required
-                  autocomplete="current-password"
-                />
-                <button
-                  type="button"
-                  class="toggle-password"
-                  onclick="togglePassword()"
-                >
-                  <i class="fas fa-eye" id="toggleIcon"></i>
-                </button>
+            <div class="brand-block">
+              <div class="brand-icon">
+                <i class="fas fa-piggy-bank"></i>
               </div>
-              <span class="error-message" id="passwordError"></span>
+              <div>
+                <p class="brand-label">Gestión inteligente del ahorro</p>
+                <h1 data-natillera-name>Mi Natillera</h1>
+              </div>
             </div>
 
-            <div class="form-options">
-              <label class="checkbox-container">
-                <input type="checkbox" id="rememberMe" />
-                <span class="checkmark"></span>
-                Recordarme
-              </label>
-              <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="btn-login" id="btnLogin">
-              <span class="btn-text">Iniciar Sesión</span>
-              <span class="btn-loader" style="display: none">
-                <i class="fas fa-spinner fa-spin"></i>
-              </span>
-            </button>
-          </form>
-
-          <div class="login-footer">
-            <p>
-              ¿No tienes cuenta?
-              <a href="#" onclick="mostrarInfoRegistro()">Contáctanos</a>
+            <p class="branding-copy">
+              Ingresa a una experiencia clara, confiable y pensada para acompañar
+              mejor el ahorro de cada persona.
             </p>
-            <div class="divider"></div>
-            <a href="/" class="back-home">
-              <i class="fas fa-arrow-left"></i>
-              Volver al inicio
-            </a>
+
+            <div class="goal-card compact">
+              <span class="goal-kicker">Tu ahorro, tu avance</span>
+              <h2>Un acceso simple, con la misma identidad visual del inicio.</h2>
+            </div>
+
+            <div class="feature-strip">
+              <div class="feature-pill">
+                <i class="fas fa-check"></i>
+                <span>Más claridad</span>
+              </div>
+              <div class="feature-pill">
+                <i class="fas fa-check"></i>
+                <span>Más confianza</span>
+              </div>
+              <div class="feature-pill">
+                <i class="fas fa-check"></i>
+                <span>Menos fricción</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section class="login-right">
+          <div class="login-box">
+            <div class="login-header">
+              <span class="section-pill">Iniciar sesión</span>
+              <h2>Bienvenido de nuevo</h2>
+              <p>Usa tus credenciales para entrar al sistema.</p>
+            </div>
+
+            <div id="alertMessage" class="alert" style="display: none">
+              <i class="fas fa-info-circle"></i>
+              <span id="alertText"></span>
+              <button class="alert-close" onclick="cerrarAlerta()">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <form id="loginForm" onsubmit="return false;">
+              <div class="form-group">
+                <label for="email">
+                  <i class="fas fa-envelope"></i>
+                  Correo electrónico
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="ejemplo@correo.com"
+                  required
+                  autocomplete="email"
+                />
+                <span class="error-message" id="emailError"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="password">
+                  <i class="fas fa-lock"></i>
+                  Contraseña
+                </label>
+                <div class="password-input">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Ingresa tu contraseña"
+                    required
+                    autocomplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    onclick="togglePassword()"
+                  >
+                    <i class="fas fa-eye" id="toggleIcon"></i>
+                  </button>
+                </div>
+                <span class="error-message" id="passwordError"></span>
+              </div>
+
+              <div class="form-options">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="rememberMe" />
+                  <span class="checkmark"></span>
+                  <span>Recordarme</span>
+                </label>
+                <a href="#" class="forgot-password">Necesitas ayuda</a>
+              </div>
+
+              <button type="submit" class="btn-login" id="btnLogin">
+                <span class="btn-text">Entrar al sistema</span>
+                <span class="btn-loader" style="display: none">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </span>
+              </button>
+            </form>
+
+            <div class="login-footer">
+              <p>
+                ¿Aún no tienes cuenta?
+                <a href="#" onclick="mostrarInfoRegistro()">Contáctanos</a>
+              </p>
+              <div class="divider"></div>
+              <a href="/" class="back-home">
+                <i class="fas fa-arrow-left"></i>
+                <span>Volver al inicio</span>
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
-    <!-- Modal de Registro -->
     <div id="modalRegistro" class="modal" style="display: none">
       <div class="modal-content">
         <span class="close" onclick="cerrarModalRegistro()">
@@ -145,13 +166,16 @@
           <h2>¿Necesitas una cuenta?</h2>
         </div>
         <div class="modal-body">
-          <p>Para crear tu cuenta, por favor contacta a un administrador:</p>
+          <p>
+            Si quieres ingresar a la plataforma, habla con el administrador para
+            validar tu registro.
+          </p>
           <div class="admin-info">
             <div class="admin-item">
               <i class="fas fa-user-tie"></i>
               <div>
                 <strong>Administrador</strong>
-                <p>Jorge</p>
+                <p>Jorge Administrador</p>
               </div>
             </div>
             <div class="admin-item">
@@ -171,12 +195,13 @@
           </div>
           <div class="modal-actions">
             <a
-              href="https://wa.me/573012423706?text=Hola,%20quiero%20informaci%C3%B3n%20para%20crear%20mi%20cuenta%20en%20la%20natillera."
+              href="https://wa.me/573012423706?text=Hola,%20quiero%20información%20para%20crear%20mi%20cuenta%20en%20la%20natillera."
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp"
             >
-              <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+              <i class="fab fa-whatsapp"></i>
+              <span>Hablar por WhatsApp</span>
             </a>
           </div>
         </div>

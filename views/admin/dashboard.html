@@ -7,16 +7,15 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/icons/icon-192.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
-    <title>Dashboard - Administrador</title>
+    <title>Panel Administrativo - Mi Natillera</title>
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
-  <body>
+  <body class="admin-theme admin-dashboard-page">
     <div class="dashboard-container">
-      <!-- SIDEBAR -->
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <div class="brand">
@@ -62,23 +61,20 @@
         <div class="sidebar-footer">
           <button class="logout-btn" onclick="cerrarSesion()">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Cerrar Sesión</span>
+            <span>Cerrar sesión</span>
           </button>
         </div>
       </aside>
 
-      <!-- MAIN CONTENT -->
       <main class="main-content">
-        <!-- HEADER -->
         <header class="dashboard-header">
           <div class="header-left">
             <button class="menu-toggle" onclick="toggleSidebar()">
               <i class="fas fa-bars"></i>
             </button>
             <div class="welcome-section">
-              <h2>
-                Bienvenid@ <span class="user-name" id="userName">...</span>
-              </h2>
+              <p class="welcome-eyebrow">Panel administrativo</p>
+              <h2>Hola, <span class="user-name" id="userName">...</span></h2>
             </div>
           </div>
           <div class="header-right">
@@ -89,9 +85,62 @@
           </div>
         </header>
 
-        <!-- CONTENT -->
         <div class="content">
-          <!-- STATS CARDS -->
+          <section class="admin-hero">
+            <div class="admin-hero-copy">
+              <span class="section-kicker">Gestión con presencia</span>
+              <h1>Un tablero más claro, profesional y confiable para tu natillera.</h1>
+              <p>
+                Consulta el ahorro acumulado, acompaña a tus usuarios y mantén el
+                control diario desde una experiencia más limpia y elegante.
+              </p>
+              <div class="hero-actions">
+                <a href="/admin/usuarios.html" class="btn-primary">
+                  <i class="fas fa-users"></i>
+                  Gestionar usuarios
+                </a>
+                <a href="/admin/aportes.html" class="btn-secondary">
+                  <i class="fas fa-hand-holding-usd"></i>
+                  Revisar aportes
+                </a>
+              </div>
+              <div class="hero-points">
+                <div class="hero-point">
+                  <i class="fas fa-shield-heart"></i>
+                  <span>Imagen ordenada para administrar con más confianza.</span>
+                </div>
+                <div class="hero-point">
+                  <i class="fas fa-chart-line"></i>
+                  <span>Accesos rápidos para seguir el movimiento del día.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="hero-panel-top">
+                <span class="hero-panel-label">Panorama del día</span>
+                <span class="hero-status">
+                  <i class="fas fa-circle"></i>
+                  Sistema activo
+                </span>
+              </div>
+              <div class="hero-panel-card hero-panel-featured">
+                <small>Enfoque principal</small>
+                <strong>Visualiza rápido cómo avanza el ahorro y dónde actuar primero.</strong>
+              </div>
+              <div class="hero-panel-grid">
+                <div class="hero-panel-card">
+                  <small>Prioridad</small>
+                  <strong>Atender aportes y préstamos activos</strong>
+                </div>
+                <div class="hero-panel-card">
+                  <small>Objetivo</small>
+                  <strong>Transmitir orden a tu equipo y a tus clientes</strong>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-icon blue">
@@ -99,7 +148,7 @@
               </div>
               <div class="stat-info">
                 <h3 id="totalClientes">0</h3>
-                <p>Total Clientes</p>
+                <p>Clientes vinculados</p>
               </div>
             </div>
 
@@ -109,7 +158,7 @@
               </div>
               <div class="stat-info">
                 <h3 id="totalAhorrado">$0</h3>
-                <p>Total Ahorrado</p>
+                <p>Ahorro acumulado</p>
               </div>
             </div>
 
@@ -119,7 +168,7 @@
               </div>
               <div class="stat-info">
                 <h3 id="prestamosActivos">0</h3>
-                <p>Préstamos Activos</p>
+                <p>Préstamos activos</p>
               </div>
             </div>
 
@@ -129,17 +178,16 @@
               </div>
               <div class="stat-info">
                 <h3 id="gananciasMes">$0</h3>
-                <p>Ganancias del Mes</p>
+                <p>Ganancias del mes</p>
               </div>
             </div>
           </div>
 
-          <!-- RESUMEN POR ADMINISTRADOR -->
           <div class="section-card">
             <div class="section-header">
               <h3>
                 <i class="fas fa-user-tie"></i>
-                Resumen por Administrador
+                Resumen por administrador
               </h3>
               <button class="btn-secondary btn-sm" onclick="cargarResumen()">
                 <i class="fas fa-sync-alt"></i>
@@ -151,9 +199,9 @@
                 <thead>
                   <tr>
                     <th>Administrador</th>
-                    <th>Clientes Asignados</th>
-                    <th>Total Ahorrado</th>
-                    <th>Ganancias Recibidas</th>
+                    <th>Clientes asignados</th>
+                    <th>Total ahorrado</th>
+                    <th>Ganancias recibidas</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -169,13 +217,12 @@
             </div>
           </div>
 
-          <!-- ACTIVIDADES RECIENTES -->
           <div class="grid-2">
             <div class="section-card">
               <div class="section-header">
                 <h3>
                   <i class="fas fa-history"></i>
-                  Aportes Recientes
+                  Aportes recientes
                 </h3>
                 <a href="/admin/aportes.html" class="btn-link">
                   Ver todos
@@ -194,7 +241,7 @@
               <div class="section-header">
                 <h3>
                   <i class="fas fa-calendar-check"></i>
-                  Actividades Próximas
+                  Actividades próximas
                 </h3>
                 <a href="/admin/actividades.html" class="btn-link">
                   Ver todas
@@ -213,13 +260,12 @@
       </main>
     </div>
 
-    <!-- MODAL DE CONFIRMACIÓN -->
     <div id="modalConfirm" class="modal" style="display: none">
       <div class="modal-overlay" onclick="cerrarModal()"></div>
       <div class="modal-container">
         <div class="modal-header">
           <i class="fas fa-sign-out-alt modal-icon"></i>
-          <h3 id="modalTitle">Cerrar Sesión</h3>
+          <h3 id="modalTitle">Cerrar sesión</h3>
         </div>
         <div class="modal-body">
           <p id="modalMessage">¿Estás seguro de que deseas cerrar sesión?</p>
@@ -242,5 +288,3 @@
     <script src="/js/pwa.js"></script>
   </body>
 </html>
-
-
