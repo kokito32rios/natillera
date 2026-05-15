@@ -146,10 +146,25 @@ body.admin-theme .menu-toggle {
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
-body.admin-theme .menu-toggle:hover {
+body.admin-theme .menu-toggle:hover,
+body.admin-theme .sidebar-toggle:hover {
     transform: translateY(-1px);
     box-shadow: 0 16px 30px rgba(15, 23, 42, 0.1);
     background: rgba(255, 255, 255, 0.98);
+}
+
+body.admin-theme .sidebar-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.88);
+    color: var(--dark);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 body.admin-theme .welcome-eyebrow {
@@ -624,6 +639,10 @@ body.admin-theme .stat-icon.purple {
         justify-content: center;
     }
 
+    body.sidebar-collapsed .sidebar-header {
+        justify-content: center;
+    }
+
     body.sidebar-collapsed .brand span,
     body.sidebar-collapsed .nav-item span,
     body.sidebar-collapsed .logout-btn span {
@@ -636,6 +655,13 @@ body.admin-theme .stat-icon.purple {
     body.sidebar-collapsed .nav-item,
     body.sidebar-collapsed .logout-btn {
         justify-content: center;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 50%;
+        transform: translateX(50%);
     }
 
     body.sidebar-collapsed .nav-item {

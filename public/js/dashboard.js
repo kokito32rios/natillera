@@ -285,11 +285,21 @@ function actualizarControlesSidebar() {
         }
     });
 
-    const sidebarToggle = document.querySelector('.sidebar-toggle');
-    if (sidebarToggle) {
-        sidebarToggle.setAttribute('aria-label', 'Cerrar menú');
-        sidebarToggle.setAttribute('title', 'Cerrar menú');
-    }
+    document.querySelectorAll('.sidebar-toggle').forEach((button) => {
+        const icon = button.querySelector('i');
+        const etiqueta = esEscritorio
+            ? (estaColapsado ? 'Expandir menú' : 'Contraer menú')
+            : 'Cerrar menú';
+
+        button.setAttribute('aria-label', etiqueta);
+        button.setAttribute('title', etiqueta);
+
+        if (icon) {
+            icon.className = esEscritorio
+                ? (estaColapsado ? 'fas fa-angles-right' : 'fas fa-angles-left')
+                : 'fas fa-times';
+        }
+    });
 }
 
 function asignarTitulosSidebar() {
