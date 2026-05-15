@@ -3,11 +3,13 @@
 // ========================================
 
 let usuarioActual = null;
+const SIDEBAR_STATE_KEY = 'admin-sidebar-collapsed';
 
 // ========================================
 // INICIALIZACIÓN
 // ========================================
 document.addEventListener('DOMContentLoaded', async () => {
+    inicializarSidebar();
     await verificarSesion();
     if (usuarioActual && esVistaDashboardAdmin()) {
         cargarDatosDashboard();
@@ -208,7 +210,121 @@ function verDetalleAdmin(idAdmin) {
 // ========================================
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    if (esVistaEscritorio()) {
+        const estaColapsado = document.body.classList.toggle('sidebar-collapsed');
+        guardarEstadoSidebar(estaColapsado);
+        actualizarControlesSidebar();
+        return;
+    }
+
     sidebar.classList.toggle('active');
+    actualizarControlesSidebar();
+}
+
+function inicializarSidebar() {
+    aplicarEstadoSidebar();
+    asignarTitulosSidebar();
+    actualizarControlesSidebar();
+
+    window.addEventListener('resize', aplicarEstadoSidebar);
+
+    document.querySelectorAll('.sidebar .nav-item').forEach((item) => {
+        item.addEventListener('click', () => {
+            if (!esVistaEscritorio()) {
+                document.getElementById('sidebar')?.classList.remove('active');
+                actualizarControlesSidebar();
+            }
+        });
+    });
+}
+
+function aplicarEstadoSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) {
+        return;
+    }
+
+    if (esVistaEscritorio()) {
+        sidebar.classList.remove('active');
+        document.body.classList.toggle(
+            'sidebar-collapsed',
+            obtenerEstadoSidebarGuardado()
+        );
+    } else {
+        document.body.classList.remove('sidebar-collapsed');
+        sidebar.classList.remove('active');
+    }
+
+    actualizarControlesSidebar();
+}
+
+function actualizarControlesSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const esEscritorio = esVistaEscritorio();
+    const estaColapsado =
+        esEscritorio && document.body.classList.contains('sidebar-collapsed');
+    const estaAbiertoMobile = !esEscritorio && sidebar?.classList.contains('active');
+
+    document.querySelectorAll('.menu-toggle').forEach((button) => {
+        const icon = button.querySelector('i');
+        const etiqueta = esEscritorio
+            ? (estaColapsado ? 'Expandir menú' : 'Contraer menú')
+            : (estaAbiertoMobile ? 'Cerrar menú' : 'Abrir menú');
+
+        button.setAttribute('aria-label', etiqueta);
+        button.setAttribute('title', etiqueta);
+
+        if (icon) {
+            icon.className = esEscritorio
+                ? (estaColapsado ? 'fas fa-angles-right' : 'fas fa-angles-left')
+                : (estaAbiertoMobile ? 'fas fa-times' : 'fas fa-bars');
+        }
+    });
+
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    if (sidebarToggle) {
+        sidebarToggle.setAttribute('aria-label', 'Cerrar menú');
+        sidebarToggle.setAttribute('title', 'Cerrar menú');
+    }
+}
+
+function asignarTitulosSidebar() {
+    document.querySelectorAll('.sidebar .nav-item').forEach((item) => {
+        const label = item.querySelector('span')?.textContent?.trim();
+        if (label) {
+            item.setAttribute('title', label);
+        }
+    });
+
+    const logoutButton = document.querySelector('.logout-btn');
+    if (logoutButton) {
+        logoutButton.setAttribute('title', 'Cerrar sesión');
+    }
+}
+
+function guardarEstadoSidebar(colapsado) {
+    try {
+        localStorage.setItem(SIDEBAR_STATE_KEY, String(colapsado));
+    } catch (error) {
+        console.warn('No se pudo guardar el estado del menú lateral:', error);
+    }
+}
+
+function obtenerEstadoSidebarGuardado() {
+    try {
+        return localStorage.getItem(SIDEBAR_STATE_KEY) === 'true';
+    } catch (error) {
+        console.warn('No se pudo leer el estado del menú lateral:', error);
+        return false;
+    }
+}
+
+function esVistaEscritorio() {
+    return window.innerWidth > 768;
 }
 
 // ========================================
