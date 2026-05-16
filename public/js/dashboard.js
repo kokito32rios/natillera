@@ -10,6 +10,7 @@ const SIDEBAR_STATE_KEY = 'admin-sidebar-collapsed';
 // ========================================
 document.addEventListener('DOMContentLoaded', async () => {
     inicializarSidebar();
+    inicializarScrollHorizontalTablas();
     await verificarSesion();
     if (usuarioActual && esVistaDashboardAdmin()) {
         cargarDatosDashboard();
@@ -366,6 +367,63 @@ function obtenerEstadoSidebarGuardado() {
 
 function esVistaEscritorio() {
     return window.innerWidth > 768;
+}
+
+function inicializarScrollHorizontalTablas() {
+    aplicarMejorasScrollTablas();
+    window.addEventListener('resize', aplicarMejorasScrollTablas);
+    document.addEventListener('tablas:actualizar', aplicarMejorasScrollTablas);
+}
+
+function aplicarMejorasScrollTablas() {
+    document.querySelectorAll('.table-responsive').forEach((container) => {
+        container.classList.toggle(
+            'has-scroll',
+            container.scrollWidth > container.clientWidth
+        );
+
+        if (container.dataset.scrollEnhanced === 'true') {
+            return;
+        }
+
+        let startX = 0;
+        let startScrollLeft = 0;
+        let dragging = false;
+
+        const getClientX = (event) =>
+            event.touches?.[0]?.clientX ?? event.clientX ?? 0;
+
+        const startDrag = (event) => {
+            dragging = true;
+            startX = getClientX(event);
+            startScrollLeft = container.scrollLeft;
+            container.classList.add('is-dragging');
+        };
+
+        const moveDrag = (event) => {
+            if (!dragging) {
+                return;
+            }
+
+            const currentX = getClientX(event);
+            container.scrollLeft = startScrollLeft - (currentX - startX);
+        };
+
+        const endDrag = () => {
+            dragging = false;
+            container.classList.remove('is-dragging');
+        };
+
+        container.addEventListener('touchstart', startDrag, { passive: true });
+        container.addEventListener('touchmove', moveDrag, { passive: true });
+        container.addEventListener('touchend', endDrag);
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', moveDrag);
+        container.addEventListener('mouseleave', endDrag);
+        container.addEventListener('mouseup', endDrag);
+
+        container.dataset.scrollEnhanced = 'true';
+    });
 }
 
 // ========================================

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'natillera-v5';
+const CACHE_NAME = 'natillera-v6';
 const APP_SHELL = [
   '/',
   '/index.html',

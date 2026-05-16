@@ -158,6 +158,7 @@ function mostrarUsuarios(listaUsuarios) {
 
   // Detectar scroll después de cargar
   setTimeout(detectarScrollTablas, 100);
+  document.dispatchEvent(new Event("tablas:actualizar"));
 }
 
 // ========================================

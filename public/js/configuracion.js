@@ -277,6 +277,7 @@ function mostrarHistorial(historial) {
     `).join('');
 
     detectarScrollTablas();
+    document.dispatchEvent(new Event('tablas:actualizar'));
 }
 
 // ========================================

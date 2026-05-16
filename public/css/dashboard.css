@@ -2098,3 +2098,39 @@ body.admin-theme .stat-icon.purple {
         justify-content: center;
     }
 }
+
+@media (max-width: 768px) {
+    body.admin-users-page .page-header {
+        gap: 0.85rem;
+    }
+
+    body.admin-users-page .page-header .btn-primary {
+        display: flex !important;
+        width: 100% !important;
+        min-height: 52px;
+        padding: 0.95rem 1rem !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.65rem;
+        color: #ffffff !important;
+        font-size: 1rem !important;
+        font-weight: 700;
+        white-space: nowrap !important;
+        overflow: visible;
+    }
+
+    body.admin-users-page .table-responsive {
+        overflow-x: scroll !important;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        cursor: grab;
+    }
+
+    body.admin-users-page .table-responsive.is-dragging {
+        cursor: grabbing;
+    }
+
+    body.admin-users-page .data-table {
+        min-width: 980px !important;
+    }
+}
