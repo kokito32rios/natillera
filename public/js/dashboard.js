@@ -97,7 +97,12 @@ async function cargarEstadisticas() {
 // CARGAR RESUMEN DE ADMINISTRADORES
 // ========================================
 async function cargarResumen() {
-    document.getElementById('tablaAdministradores').innerHTML = `
+    const table = document.getElementById('tablaAdministradores');
+    if (!table) {
+        return;
+    }
+
+    table.innerHTML = `
         <tr>
             <td colspan="5" class="text-center">
                 Funcionalidad en desarrollo
@@ -113,12 +118,15 @@ async function cargarAportesRecientes() {
     try {
         const response = await fetch('/api/aportes');
         const aportes = await response.json();
+        const container = document.getElementById('aportesRecientes');
+
+        if (!container) {
+            return;
+        }
 
         const aportesRecientes = aportes
             .sort((a, b) => new Date(b.fecha_pago) - new Date(a.fecha_pago))
             .slice(0, 5);
-
-        const container = document.getElementById('aportesRecientes');
 
         if (aportesRecientes.length === 0) {
             container.innerHTML = `
@@ -157,16 +165,21 @@ async function cargarActividadesProximas() {
     try {
         const response = await fetch('/api/actividades');
         const actividades = await response.json();
+        const container = document.getElementById('actividadesProximas');
+
+        if (!container) {
+            return;
+        }
 
         const hoy = new Date();
         const actividadesProximas = actividades
-            .filter((actividad) =>
-                actividad.estado === 'planeada' && new Date(actividad.fecha) >= hoy
+            .filter(
+                (actividad) =>
+                    actividad.estado === 'planeada' &&
+                    new Date(actividad.fecha) >= hoy
             )
             .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
             .slice(0, 5);
-
-        const container = document.getElementById('actividadesProximas');
 
         if (actividadesProximas.length === 0) {
             container.innerHTML = `
@@ -206,7 +219,7 @@ function verDetalleAdmin(idAdmin) {
 }
 
 // ========================================
-// TOGGLE SIDEBAR
+// SIDEBAR
 // ========================================
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
@@ -221,11 +234,13 @@ function toggleSidebar() {
         return;
     }
 
-    sidebar.classList.toggle('active');
+    const abierto = sidebar.classList.toggle('active');
+    document.body.classList.toggle('sidebar-open', abierto);
     actualizarControlesSidebar();
 }
 
 function inicializarSidebar() {
+    asegurarBotonFlotanteSidebar();
     aplicarEstadoSidebar();
     asignarTitulosSidebar();
     actualizarControlesSidebar();
@@ -236,10 +251,24 @@ function inicializarSidebar() {
         item.addEventListener('click', () => {
             if (!esVistaEscritorio()) {
                 document.getElementById('sidebar')?.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
                 actualizarControlesSidebar();
             }
         });
     });
+}
+
+function asegurarBotonFlotanteSidebar() {
+    if (document.querySelector('.sidebar-fab-toggle')) {
+        return;
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'sidebar-fab-toggle';
+    button.innerHTML = '<i class="fas fa-bars"></i>';
+    button.addEventListener('click', toggleSidebar);
+    document.body.appendChild(button);
 }
 
 function aplicarEstadoSidebar() {
@@ -250,12 +279,14 @@ function aplicarEstadoSidebar() {
 
     if (esVistaEscritorio()) {
         sidebar.classList.remove('active');
+        document.body.classList.remove('sidebar-open');
         document.body.classList.toggle(
             'sidebar-collapsed',
             obtenerEstadoSidebarGuardado()
         );
     } else {
         document.body.classList.remove('sidebar-collapsed');
+        document.body.classList.remove('sidebar-open');
         sidebar.classList.remove('active');
     }
 
@@ -269,7 +300,7 @@ function actualizarControlesSidebar() {
         esEscritorio && document.body.classList.contains('sidebar-collapsed');
     const estaAbiertoMobile = !esEscritorio && sidebar?.classList.contains('active');
 
-    document.querySelectorAll('.menu-toggle').forEach((button) => {
+    document.querySelectorAll('.sidebar-fab-toggle').forEach((button) => {
         const icon = button.querySelector('i');
         const etiqueta = esEscritorio
             ? (estaColapsado ? 'Expandir menú' : 'Contraer menú')
@@ -400,7 +431,6 @@ function cerrarSesion() {
     );
 }
 
-// Cerrar modal con ESC
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         cerrarModal();

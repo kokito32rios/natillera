@@ -19,20 +19,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     .addEventListener("submit", guardarUsuario);
 
   // Detectar scroll en tabla
-  detectarScrollTabla();
+  detectarScrollTablas();
+  window.addEventListener("resize", detectarScrollTablas);
 });
 
 // ========================================
 // DETECTAR SCROLL EN TABLA
 // ========================================
-function detectarScrollTabla() {
-  const tableResponsive = document.querySelector(".table-responsive");
-  if (tableResponsive) {
+function detectarScrollTablas() {
+  document.querySelectorAll(".table-responsive").forEach((tableResponsive) => {
     const table = tableResponsive.querySelector(".data-table");
-    if (table && table.offsetWidth > tableResponsive.offsetWidth) {
-      tableResponsive.classList.add("has-scroll");
+    if (!table) {
+      return;
     }
-  }
+
+    tableResponsive.classList.toggle(
+      "has-scroll",
+      table.scrollWidth > tableResponsive.clientWidth
+    );
+  });
 }
 
 // ========================================
@@ -152,7 +157,7 @@ function mostrarUsuarios(listaUsuarios) {
     .join("");
 
   // Detectar scroll después de cargar
-  setTimeout(detectarScrollTabla, 100);
+  setTimeout(detectarScrollTablas, 100);
 }
 
 // ========================================

@@ -20,7 +20,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Event listener para el formulario
     document.getElementById('formConfig').addEventListener('submit', guardarConfiguracion);
+    detectarScrollTablas();
+    window.addEventListener('resize', detectarScrollTablas);
 });
+
+function detectarScrollTablas() {
+    document.querySelectorAll('.table-responsive').forEach((tableResponsive) => {
+        const table = tableResponsive.querySelector('.data-table');
+        if (!table) {
+            return;
+        }
+
+        tableResponsive.classList.toggle(
+            'has-scroll',
+            table.scrollWidth > tableResponsive.clientWidth
+        );
+    });
+}
 
 // ========================================
 // CARGAR CONFIGURACIONES
@@ -259,6 +275,8 @@ function mostrarHistorial(historial) {
             <td>${formatDate(item.fecha)}</td>
         </tr>
     `).join('');
+
+    detectarScrollTablas();
 }
 
 // ========================================
