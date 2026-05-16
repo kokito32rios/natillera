@@ -1981,3 +1981,120 @@ body.admin-theme .stat-icon.purple {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 768px) {
+    body.admin-theme .dashboard-header {
+        padding: 1rem 1rem 1rem 4.6rem;
+        align-items: flex-start;
+    }
+
+    body.admin-theme .header-right {
+        display: none;
+    }
+
+    body.admin-theme .welcome-section {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body.admin-theme .welcome-section h2 {
+        font-size: 1.05rem;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    body.admin-theme .sidebar-fab-toggle {
+        top: 1.2rem;
+        left: 0.9rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+    }
+
+    .page-header {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .page-header > div {
+        width: 100%;
+    }
+
+    .page-header .btn-primary,
+    .page-header .btn-secondary,
+    .page-header button {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.95rem 1rem;
+        text-align: center;
+    }
+
+    .page-header .btn-primary i,
+    .page-header .btn-secondary i,
+    .page-header button i {
+        margin: 0;
+    }
+
+    .filters-container,
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group > * {
+        width: 100%;
+    }
+
+    .search-box input,
+    .filter-group select,
+    .filter-group button,
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        min-height: 48px;
+        font-size: 16px;
+    }
+
+    .section-card {
+        overflow: hidden;
+    }
+
+    .table-responsive {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        padding-bottom: 0.8rem;
+    }
+
+    .table-responsive.has-scroll::after {
+        opacity: 1;
+    }
+
+    .data-table {
+        width: max-content !important;
+        min-width: 820px !important;
+    }
+
+    .data-table th,
+    .data-table td {
+        white-space: nowrap;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer button,
+    .hero-actions a {
+        width: 100%;
+        justify-content: center;
+    }
+}
